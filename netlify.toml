@@ -1,0 +1,27 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers de Segurança
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Previne clickjacking - não permite que o site seja carregado em iframes
+    X-Frame-Options = "DENY"
+    
+    # Previne MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # Controla informações de referência enviadas
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Restringe APIs do navegador
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    
+    # Content Security Policy - protege contra XSS
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://d335luupugsy2.cloudfront.net https://*.rdstation.com.br; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://olinda.bcb.gov.br https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net; frame-src 'self' https://*.firebaseapp.com https://*.rdstation.com.br;"
