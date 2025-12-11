@@ -1,0 +1,1 @@
+exports.hublaWebhook = require("./hublaWebhook").hublaWebhook;

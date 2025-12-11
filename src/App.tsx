@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from './lib/firebase';
 import { LoginScreen } from './components/LoginScreen';
 import { RegisterScreen } from './components/RegisterScreen';
@@ -81,16 +81,20 @@ export default function App() {
 
   async function checkUserPaymentStatus(user: User): Promise<boolean> {
     if (!user) return false;
-    const paymentsRef = collection(db, 'payments');
-    const q = query(
-      paymentsRef,
-      where('buyerEmail', '==', user.email),
-      where('status', '==', 'paid')
-    );
 
     try {
-      const querySnapshot = await getDocs(q);
-      return !querySnapshot.empty;
+      // Check for user in the active_users view (managed by Hubla webhook)
+      const activeUserRef = doc(db, 'views', 'active_users', 'list', user.uid);
+      const activeUserSnap = await getDoc(activeUserRef);
+
+      if (activeUserSnap.exists()) {
+        const data = activeUserSnap.data();
+        // Double check status just in case, though existence in this list should imply access
+        const hasAccess = ['paid', 'active', 'completed', 'on_schedule'].includes(data.status);
+        return hasAccess;
+      }
+
+      return false;
     } catch (error) {
       console.error('Erro ao verificar o status do pagamento:', error);
       return false;

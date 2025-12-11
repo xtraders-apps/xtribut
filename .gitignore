@@ -17,3 +17,8 @@ lerna-debug.log*
 
 .vite
 .cache
+
+# Firebase
+.firebase/
+firebase-debug.log*
+.dataconnect
