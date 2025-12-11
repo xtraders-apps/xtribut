@@ -83,20 +83,14 @@ export default function App() {
     if (!user) return false;
 
     try {
-      // Check for user in the active_users view (managed by Hubla webhook)
-      const activeUserRef = doc(db, 'views', 'active_users', 'list', user.uid);
-      const activeUserSnap = await getDoc(activeUserRef);
+      // Force refresh token to get latest custom claims
+      await user.getIdToken(true);
+      const tokenResult = await user.getIdTokenResult();
 
-      if (activeUserSnap.exists()) {
-        const data = activeUserSnap.data();
-        // Double check status just in case, though existence in this list should imply access
-        const hasAccess = ['paid', 'active', 'completed', 'on_schedule'].includes(data.status);
-        return hasAccess;
-      }
-
-      return false;
+      // Check for the 'hasAccess' claim set by the webhook
+      return !!tokenResult.claims.hasAccess;
     } catch (error) {
-      console.error('Erro ao verificar o status do pagamento:', error);
+      console.error('Erro ao verificar permissões (claims):', error);
       return false;
     }
   }
