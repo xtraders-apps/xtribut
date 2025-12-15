@@ -1,0 +1,82 @@
+================================================================================
+           CERTIFICADO DE HASH PARA REGISTRO DE PROPRIEDADE INTELECTUAL
+                         PROGRAMA DE COMPUTADOR
+================================================================================
+
+INFORMAÇÕES DO PROJETO
+----------------------
+Nome do Projeto:        XTributation - Sistema de Tributação para Mercado Americano
+Versão:                 1.0.0
+Linguagem Principal:    TypeScript / React
+Plataforma:             Web Application (Single Page Application)
+
+INFORMAÇÕES DO TITULAR
+----------------------
+(A ser preenchido pela empresa de registro)
+Titular:                _______________________________________________
+CPF/CNPJ:               _______________________________________________
+Endereço:               _______________________________________________
+
+HASH DE VERIFICAÇÃO DO CÓDIGO-FONTE
+------------------------------------
+Algoritmo:              SHA-256 (Secure Hash Algorithm 256-bit)
+
+Hash do Código-Fonte:   FDCB806E5DA4F43DEEF332DD9540D12FB174546966AE19411967317AD
+
+Git Commit Hash:        3eebf823293cd601910ebd49c7b442d817cd232c3
+
+INFORMAÇÕES TEMPORAIS
+---------------------
+Data de Geração:        10 de dezembro de 2025
+Hora de Geração:        11:54:32 (Horário de Brasília, UTC-3)
+Data/Hora UTC:          2025-12-10 14:54:32 UTC
+
+DESCRIÇÃO DO SOFTWARE
+---------------------
+O XTributation é um sistema web desenvolvido para auxiliar investidores 
+brasileiros que operam no mercado americano de ações a calcular e gerenciar
+suas obrigações tributárias. O software oferece funcionalidades de:
+
+- Cálculo de variação cambial para envios e retiradas de recursos
+- Apuração de Imposto de Renda sobre operações em bolsa estrangeira
+- Geração de relatórios fiscais detalhados
+- Histórico completo de operações e transações
+- Exportação de dados para declaração de imposto de renda
+
+TECNOLOGIAS UTILIZADAS
+----------------------
+- React 18.3.1
+- TypeScript 5.3.3
+- Vite 5.1.0
+- Firebase (Authentication e Firestore)
+- Tailwind CSS 4.0.0
+- Chart.js para visualizações
+- jsPDF para geração de relatórios
+
+ESTRUTURA DO PROJETO
+--------------------
+Total de Arquivos de Código-Fonte: 98 arquivos
+Diretório Principal: /src
+
+Componentes Principais:
+- /src/components/ - Componentes React da interface
+- /src/lib/ - Bibliotecas e utilitários
+- /src/lib/api/ - Integrações com APIs externas (BCB)
+- /src/lib/calculations/ - Lógica de cálculos tributários
+
+DECLARAÇÃO DE AUTENTICIDADE
+---------------------------
+O hash SHA-256 acima representa uma assinatura digital única do código-fonte
+do software na data e hora especificadas. Qualquer alteração no código-fonte,
+por menor que seja, resultará em um hash completamente diferente, garantindo
+a integridade e autenticidade do registro.
+
+O Git Commit Hash é um identificador imutável gerado pelo sistema de controle
+de versão Git, servindo como prova adicional de existência do código na data
+especificada.
+
+================================================================================
+                              FIM DO CERTIFICADO
+================================================================================
+
+Gerado automaticamente em: 2025-12-10T11:54:32-03:00
