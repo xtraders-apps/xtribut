@@ -8,13 +8,12 @@ import { NoAccessScreen } from './components/NoAccessScreen';
 import { TermsModal } from './components/TermsModal';
 import { LoadingOverlay } from './components/LoadingOverlay';
 import { MainApplication } from './components/MainApplication';
-import { LandingPage } from './components/LandingPage';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState('Carregando plataforma...');
-  const [screen, setScreen] = useState<'landing' | 'login' | 'register' | 'no-access' | 'terms' | 'main'>('landing');
+  const [screen, setScreen] = useState<'login' | 'register' | 'no-access' | 'terms' | 'main'>('login');
   const [showMain, setShowMain] = useState(false);
   const [shouldAutoStartTutorial, setShouldAutoStartTutorial] = useState(false);
 
@@ -62,17 +61,12 @@ export default function App() {
           setLoading(false);
         }
       } else {
-        console.log('Usuário não autenticado, mostrando landing page');
+        console.log('Usuário não autenticado, mostrando tela de login');
         setUser(null);
-        // If we are already on login or register, don't force back to landing automatically
-        // unless it's the initial load. But for simplicity, let's keep the user where they are
-        // if they are navigating between login/register.
-        // However, if they just logged out, we probably want to go to landing.
-        // For now, let's default to landing if not already on login/register.
-        setScreen(prev => (prev === 'login' || prev === 'register') ? prev : 'landing');
+        setScreen(prev => (prev === 'login' || prev === 'register') ? prev : 'login');
         setLoading(false);
         setShowMain(false);
-        document.body.style.overflow = 'auto'; // Landing page needs scroll
+        document.body.style.overflow = 'auto';
       }
     });
 
@@ -139,12 +133,7 @@ export default function App() {
 
   return (
     <>
-      {screen === 'landing' && (
-        <LandingPage
-          onLogin={() => setScreen('login')}
-          onRegister={() => setScreen('register')}
-        />
-      )}
+
       {screen === 'login' && <LoginScreen onSwitchToRegister={() => setScreen('register')} />}
       {screen === 'register' && <RegisterScreen onSwitchToLogin={() => setScreen('login')} />}
       {screen === 'no-access' && <NoAccessScreen />}

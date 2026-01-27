@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import { Eye, EyeOff } from 'lucide-react';
 
 interface RegisterScreenProps {
@@ -54,6 +55,19 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
         termsAccepted: false,
         createdAt: new Date().toISOString()
       });
+
+      // Sincronizar acesso imediatamente após o cadastro
+      try {
+        const functions = getFunctions();
+        const syncAccess = httpsCallable(functions, 'syncUserAccessOnSignup');
+        await syncAccess();
+        console.log('Acesso sincronizado com sucesso');
+      } catch (syncError) {
+        console.error('Erro ao sincronizar acesso:', syncError);
+        // Não bloqueia o fluxo principal se a sincronização falhar, 
+        // o usuário ainda pode tentar logar depois.
+      }
+
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
         setMessage('Este e-mail já está em uso.');
