@@ -173,7 +173,7 @@ export function WrappedTab() {
           <Logo className="h-16 w-auto mx-auto mb-6" />
           <h3 className="text-xl text-accent mb-3">Nenhum Dado Disponível</h3>
           <p className="text-muted">
-            Importe seus trades para visualizar o XTraders Report 2024
+            Importe seus trades para visualizar o MDT Report 2024
           </p>
         </div>
       </div>
@@ -274,7 +274,7 @@ export function WrappedTab() {
         {/* XTRADERS no topo */}
         <div className="text-center relative z-20">
           <h3 className="font-['Sora',sans-serif] font-bold text-[24px] text-white tracking-[8px] uppercase">
-            XTRADERS
+            MDT
           </h3>
         </div>
 
@@ -555,66 +555,55 @@ export function WrappedTab() {
     </CardWrapper>,
 
     // === CARD 6: MÊS A MÊS (MELHOR ATIVO POR MÊS) ===
-    <CardWrapper index={5} key="month-by-month">
-      <div className="w-[540px] h-[800px] bg-[#0D0D0D] rounded-[43px] border-2 border-[#D4AF37] overflow-hidden shadow-2xl flex flex-col p-8">
-        {/* Título */}
-        <div className="text-center mt-4 mb-8">
-          <h3 className="font-['Sora',sans-serif] font-bold text-[16px] text-white tracking-[3px] uppercase">
-            MÊS A MÊS
-          </h3>
-        </div>
+    <div className="grid grid-cols-3 gap-3 w-full">
+      {sortedMonths.map((monthKey) => {
+        const monthlyTrades = processedTrades.filter(t => t.mes_ano === monthKey);
 
-        {/* Grid de meses - SEM SCROLL */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="grid grid-cols-3 gap-3 w-full">
-            {sortedMonths.map((monthKey) => {
-              const monthlyTrades = processedTrades.filter(t => t.mes_ano === monthKey);
+        // Agrupar trades por ativo e somar os resultados
+        const assetProfitInMonth: { [key: string]: number } = {};
+        monthlyTrades.forEach(trade => {
+          if (!assetProfitInMonth[trade.ativo]) {
+            assetProfitInMonth[trade.ativo] = 0;
+          }
+          assetProfitInMonth[trade.ativo] += trade.resultado_liquido_brl;
+        });
 
-              // Agrupar trades por ativo e somar os resultados
-              const assetProfitInMonth: { [key: string]: number } = {};
-              monthlyTrades.forEach(trade => {
-                if (!assetProfitInMonth[trade.ativo]) {
-                  assetProfitInMonth[trade.ativo] = 0;
-                }
-                assetProfitInMonth[trade.ativo] += trade.resultado_liquido_brl;
-              });
+        // Encontrar o ativo com maior lucro agregado (mesmo que seja negativo)
+        let bestAsset = { symbol: 'N/A', profit: -Infinity };
+        Object.entries(assetProfitInMonth).forEach(([symbol, profit]) => {
+          if (profit > bestAsset.profit) {
+            bestAsset = { symbol, profit };
+          }
+        });
 
-              // Encontrar o ativo com maior lucro agregado (mesmo que seja negativo)
-              let bestAsset = { symbol: 'N/A', profit: -Infinity };
-              Object.entries(assetProfitInMonth).forEach(([symbol, profit]) => {
-                if (profit > bestAsset.profit) {
-                  bestAsset = { symbol, profit };
-                }
-              });
+        const [, monthNum] = monthKey.split('-');
+        const monthNames = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+        const monthLabel = monthNames[parseInt(monthNum) - 1];
 
-              const [, monthNum] = monthKey.split('-');
-              const monthNames = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-              const monthLabel = monthNames[parseInt(monthNum) - 1];
-
-              return (
-                <div key={monthKey} className="bg-gradient-to-br from-[rgba(18,18,18,0.8)] to-[rgba(18,18,18,0.4)] rounded-[16px] border-2 border-[#9c7b0e] p-3 text-center shadow-lg">
-                  <div className="font-['Sora',sans-serif] font-bold text-[11px] text-[#d4af37] tracking-wide mb-1.5">
-                    {monthLabel}
-                  </div>
-                  <div className="font-['Sora',sans-serif] font-extrabold text-[15px] text-white mb-1.5 truncate">
-                    {bestAsset.symbol}
-                  </div>
-                  <div className={`font-['Sora',sans-serif] font-bold text-[12px] ${bestAsset.profit >= 0 ? 'text-[#0aff39]' : 'text-[#ff0a0a]'
-                    }`}>
-                    {formatCurrency(bestAsset.profit)}
-                  </div>
-                </div>
-              );
-            })}
+        return (
+          <div key={monthKey} className="bg-gradient-to-br from-[rgba(18,18,18,0.8)] to-[rgba(18,18,18,0.4)] rounded-[16px] border-2 border-[#9c7b0e] p-3 text-center shadow-lg">
+            <div className="font-['Sora',sans-serif] font-bold text-[11px] text-[#d4af37] tracking-wide mb-1.5">
+              {monthLabel}
+            </div>
+            <div className="font-['Sora',sans-serif] font-extrabold text-[15px] text-white mb-1.5 truncate">
+              {bestAsset.symbol}
+            </div>
+            <div className={`font-['Sora',sans-serif] font-bold text-[12px] ${bestAsset.profit >= 0 ? 'text-[#0aff39]' : 'text-[#ff0a0a]'
+              }`}>
+              {formatCurrency(bestAsset.profit)}
+            </div>
           </div>
-        </div>
+        );
+      })}
+    </div>
+        </div >
 
-        {/* Logo X embaixo */}
-        <div className="flex justify-center mt-4 pb-4">
-          <Logo className="h-[50px] w-auto opacity-[0.15]" />
-        </div>
-      </div>
-    </CardWrapper>,
+    {/* Logo X embaixo */ }
+    < div className = "flex justify-center mt-4 pb-4" >
+      <Logo className="h-[50px] w-auto opacity-[0.15]" />
+        </div >
+      </div >
+    </CardWrapper >,
 
     // === CARD 7: XTRADERS REPORT (FINAL SUMMARY) ===
     <CardWrapper index={6} key="final-summary">
@@ -622,7 +611,7 @@ export function WrappedTab() {
         {/* XTRADERS no topo */}
         <div className="text-center mt-6 mb-8">
           <h3 className="font-['Sora',sans-serif] font-bold text-[16px] text-white tracking-[3px] uppercase">
-            XTRADERS
+            MDT
           </h3>
         </div>
 
@@ -746,7 +735,7 @@ export function WrappedTab() {
       <header className="text-center mb-12 relative z-50">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-3">
           <h1 className="font-['Sora',sans-serif] font-extrabold text-[32px] sm:text-[40px] bg-gradient-to-r from-[#D4AF37] via-[#F4E5B8] to-[#D4AF37] bg-clip-text text-transparent tracking-tight">
-            XTRADERS REPORT
+            MDT REPORT
           </h1>
           <div className="w-32">
             <Select value={selectedYear} onValueChange={setSelectedYear}>

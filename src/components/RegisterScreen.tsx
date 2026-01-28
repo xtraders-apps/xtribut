@@ -108,7 +108,7 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
           </svg>
         </div>
 
-        <h1 className="text-3xl font-semibold mb-3 text-text-primary">Criar Nova Conta</h1>
+        <h1 className="text-3xl font-semibold mb-3 text-text-primary">MDT - Criar Nova Conta</h1>
         <p className="text-base text-text-secondary mb-8">Use o mesmo e-mail que você utilizou na compra.</p>
 
         <div className="space-y-4">
