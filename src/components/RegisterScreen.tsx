@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
 import { getFunctions, httpsCallable } from 'firebase/functions';
@@ -70,15 +70,25 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
 
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
-        setMessage('Este e-mail já está em uso.');
+        try {
+          await sendPasswordResetEmail(auth, email);
+          setMessage('Este e-mail já possui cadastro. Enviamos um link para o seu e-mail para você definir sua senha e acessar a plataforma.');
+          setMessageType('success');
+        } catch (resetError) {
+          console.error('Erro ao enviar e-mail de redefinição:', resetError);
+          setMessage('Este e-mail já está em uso. Tente redefinir sua senha na tela de login.');
+          setMessageType('error');
+        }
       } else if (error.code === 'auth/invalid-email') {
         setMessage('Formato de e-mail inválido.');
+        setMessageType('error');
       } else if (error.code === 'auth/weak-password') {
         setMessage('Senha muito fraca. Use uma senha mais forte.');
+        setMessageType('error');
       } else {
         setMessage('Erro ao criar conta. Tente novamente.');
+        setMessageType('error');
       }
-      setMessageType('error');
     }
   };
 
