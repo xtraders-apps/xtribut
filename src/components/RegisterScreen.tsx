@@ -11,10 +11,6 @@ interface RegisterScreenProps {
 
 export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState<'error' | 'success'>('error');
 
@@ -27,66 +23,19 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
       return;
     }
 
-    if (password !== confirmPassword) {
-      setMessage('As senhas não coincidem.');
-      setMessageType('error');
-      return;
-    }
-
-    // Validação de força de senha
-    if (password.length < 8) {
-      setMessage('A senha deve ter pelo menos 8 caracteres.');
-      setMessageType('error');
-      return;
-    }
-
-    const hasNumber = /\d/.test(password);
-    const hasLetter = /[a-zA-Z]/.test(password);
-    if (!hasNumber || !hasLetter) {
-      setMessage('A senha deve conter letras e números.');
-      setMessageType('error');
-      return;
-    }
-
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(db, 'users', userCredential.user.uid), {
-        email: userCredential.user.email,
-        termsAccepted: false,
-        createdAt: new Date().toISOString()
-      });
-
-      // Sincronizar acesso imediatamente após o cadastro
-      try {
-        const functions = getFunctions();
-        const syncAccess = httpsCallable(functions, 'syncUserAccessOnSignup');
-        await syncAccess();
-        console.log('Acesso sincronizado com sucesso');
-      } catch (syncError) {
-        console.error('Erro ao sincronizar acesso:', syncError);
-        // Não bloqueia o fluxo principal se a sincronização falhar, 
-        // o usuário ainda pode tentar logar depois.
-      }
-
+      await sendPasswordResetEmail(auth, email);
+      setMessage('Enviamos um link para o seu e-mail para você definir sua senha e acessar a plataforma.');
+      setMessageType('success');
     } catch (error: any) {
-      if (error.code === 'auth/email-already-in-use') {
-        try {
-          await sendPasswordResetEmail(auth, email);
-          setMessage('Este e-mail já possui cadastro. Enviamos um link para o seu e-mail para você definir sua senha e acessar a plataforma.');
-          setMessageType('success');
-        } catch (resetError) {
-          console.error('Erro ao enviar e-mail de redefinição:', resetError);
-          setMessage('Este e-mail já está em uso. Tente redefinir sua senha na tela de login.');
-          setMessageType('error');
-        }
+      if (error.code === 'auth/user-not-found') {
+        setMessage('E-mail não encontrado. Certifique-se de usar o mesmo e-mail da compra.');
+        setMessageType('error');
       } else if (error.code === 'auth/invalid-email') {
         setMessage('Formato de e-mail inválido.');
         setMessageType('error');
-      } else if (error.code === 'auth/weak-password') {
-        setMessage('Senha muito fraca. Use uma senha mais forte.');
-        setMessageType('error');
       } else {
-        setMessage('Erro ao criar conta. Tente novamente.');
+        setMessage('Erro ao processar solicitação. Tente novamente.');
         setMessageType('error');
       }
     }
@@ -108,66 +57,24 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
           </svg>
         </div>
 
-        <h1 className="text-3xl font-semibold mb-3 text-text-primary">MDT - Criar Nova Conta</h1>
-        <p className="text-base text-text-secondary mb-8">Use o mesmo e-mail que você utilizou na compra.</p>
+        <h1 className="text-3xl font-semibold mb-3 text-text-primary">MDT - Primeiro Acesso</h1>
+        <p className="text-base text-text-secondary mb-8">Use o mesmo e-mail que você utilizou na compra para receber seu link de acesso.</p>
 
         <div className="space-y-4">
           <input
             type="email"
-            placeholder="Seu e-mail"
+            placeholder="Seu e-mail da compra"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="input-field"
           />
-          <div className="password-container">
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Crie uma senha (mín. 6 caracteres)"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input-field"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="password-toggle"
-              aria-label="Mostrar ou ocultar senha"
-            >
-              {showPassword ? (
-                <EyeOff className="w-5 h-5" />
-              ) : (
-                <Eye className="w-5 h-5" />
-              )}
-            </button>
-          </div>
-          <div className="password-container">
-            <input
-              type={showConfirmPassword ? 'text' : 'password'}
-              placeholder="Confirme sua senha"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="input-field"
-            />
-            <button
-              type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="password-toggle"
-              aria-label="Mostrar ou ocultar senha"
-            >
-              {showConfirmPassword ? (
-                <EyeOff className="w-5 h-5" />
-              ) : (
-                <Eye className="w-5 h-5" />
-              )}
-            </button>
-          </div>
         </div>
 
         <button
           onClick={handleRegistration}
           className="mt-6 btn btn-primary w-full text-base py-3"
         >
-          <span>Cadastrar e Acessar</span>
+          <span>Receber Link de Acesso</span>
         </button>
 
         <div className="mt-6 text-sm">
@@ -184,7 +91,7 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
         </div>
 
         {message && (
-          <p className={`message ${messageType}`}>
+          <p className={`message ${messageType} mt-4`}>
             {message}
           </p>
         )}

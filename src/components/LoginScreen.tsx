@@ -115,7 +115,7 @@ export function LoginScreen({ onSwitchToRegister }: LoginScreenProps) {
             }}
             className="font-semibold text-accent-primary hover:text-accent-hover transition-colors duration-200"
           >
-            Crie sua conta aqui.
+            Clique aqui para ativar sua conta.
           </a>
         </div>
 
