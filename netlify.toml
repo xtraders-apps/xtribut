@@ -5,31 +5,7 @@
 [build.environment]
   SECRETS_SCAN_ENABLED = "false"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# Headers de Segurança
-[[headers]]
-  for = "/*"
-  [headers.values]
-    # Previne clickjacking - não permite que o site seja carregado em iframes
-    X-Frame-Options = "DENY"
-    
-    # Previne MIME type sniffing
-    X-Content-Type-Options = "nosniff"
-    
-    # Controla informações de referência enviadas
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    
-    # Restringe APIs do navegador
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    
-    # Content Security Policy - protege contra XSS
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://d335luupugsy2.cloudfront.net https://*.rdstation.com.br https://www.googletagmanager.com https://ajax.googleapis.com https://cdnjs.cloudflare.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://olinda.bcb.gov.br https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net https://www.google-analytics.com; frame-src 'self' https://*.firebaseapp.com https://*.rdstation.com.br;"
-
-
+# 1) LP do evento
 [[redirects]]
   from = "/inscricao"
   to = "https://hilarious-bubblegum-4341ca.netlify.app"
@@ -41,3 +17,19 @@
   to = "https://hilarious-bubblegum-4341ca.netlify.app/:splat"
   status = 200
   force = true
+
+# 2) App (SPA) – continua igual
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers de Segurança (inalterados)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://d335luupugsy2.cloudfront.net https://*.rdstation.com.br https://www.googletagmanager.com https://ajax.googleapis.com https://cdnjs.cloudflare.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://olinda.bcb.gov.br https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net https://www.google-analytics.com; frame-src 'self' https://*.firebaseapp.com https://*.rdstation.com.br;"
