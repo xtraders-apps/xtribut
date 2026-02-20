@@ -1,3 +1,6 @@
+###########################
+# BUILD CONFIG
+###########################
 [build]
   command = "npm run build"
   publish = "build"
@@ -5,41 +8,37 @@
 [build.environment]
   SECRETS_SCAN_ENABLED = "false"
 
-# 1) Redirects para a LP (subdomínio)
 
-# /inscricao  -> insc. mdt
-[[redirects]]
-  from = "/inscricao"
-  to = "https://inscricao.mdt-xtraders.com.br"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/inscricao/*"
-  to = "https://inscricao.mdt-xtraders.com.br/:splat"
-  status = 301
-  force = true
-
-# /inscricao-mdt -> insc. mdt
+###########################
+# PROXY PARA LANDING PAGE
+# Mantém a URL visível:
+# https://mdt-xtraders.com.br/inscricao-mdt
+###########################
 [[redirects]]
   from = "/inscricao-mdt"
   to = "https://inscricao.mdt-xtraders.com.br"
-  status = 301
+  status = 200
   force = true
 
 [[redirects]]
   from = "/inscricao-mdt/*"
   to = "https://inscricao.mdt-xtraders.com.br/:splat"
-  status = 301
+  status = 200
   force = true
 
-# 2) App (SPA) – continua igual
+
+###########################
+# SPA PRINCIPAL (APP)
+###########################
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Headers de Segurança (inalterados)
+
+###########################
+# HEADERS DE SEGURANÇA
+###########################
 [[headers]]
   for = "/*"
   [headers.values]
@@ -47,4 +46,32 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://d335luupugsy2.cloudfront.net https://*.rdstation.com.br https://www.googletagmanager.com https://ajax.googleapis.com https://cdnjs.cloudflare.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://olinda.bcb.gov.br https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net https://www.google-analytics.com; frame-src 'self' https://*.firebaseapp.com https://*.rdstation.com.br;"
+
+    # CSP ATUALIZADO
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval'
+        https://cdn.tailwindcss.com
+        https://d335luupugsy2.cloudfront.net
+        https://*.rdstation.com.br
+        https://www.googletagmanager.com
+        https://ajax.googleapis.com
+        https://cdnjs.cloudflare.com
+        https://www.google-analytics.com;
+      style-src 'self' 'unsafe-inline'
+        https://fonts.googleapis.com
+        https://cdnjs.cloudflare.com;
+      font-src 'self' https://fonts.gstatic.com data:;
+      img-src 'self' data: blob: https:;
+      connect-src 'self'
+        https://*.googleapis.com
+        https://*.firebaseio.com
+        https://*.firebase.com
+        https://olinda.bcb.gov.br
+        https://*.rdstation.com.br
+        https://d335luupugsy2.cloudfront.net
+        https://www.google-analytics.com;
+      frame-src 'self'
+        https://*.firebaseapp.com
+        https://*.rdstation.com.br;
+    """
