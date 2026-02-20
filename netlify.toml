@@ -5,17 +5,32 @@
 [build.environment]
   SECRETS_SCAN_ENABLED = "false"
 
-# 1) LP do evento
+# 1) Redirects para a LP (subdomínio)
+
+# /inscricao  -> insc. mdt
 [[redirects]]
   from = "/inscricao"
-  to = "https://hilarious-bubblegum-4341ca.netlify.app"
-  status = 200
+  to = "https://inscricao.mdt-xtraders.com.br"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/inscricao/*"
-  to = "https://hilarious-bubblegum-4341ca.netlify.app/:splat"
-  status = 200
+  to = "https://inscricao.mdt-xtraders.com.br/:splat"
+  status = 301
+  force = true
+
+# /inscricao-mdt -> insc. mdt
+[[redirects]]
+  from = "/inscricao-mdt"
+  to = "https://inscricao.mdt-xtraders.com.br"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/inscricao-mdt/*"
+  to = "https://inscricao.mdt-xtraders.com.br/:splat"
+  status = 301
   force = true
 
 # 2) App (SPA) – continua igual
