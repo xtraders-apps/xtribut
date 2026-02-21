@@ -8,15 +8,6 @@
 [build.environment]
   SECRETS_SCAN_ENABLED = "false"
 
-
-###########################
-# REDIRECTS
-###########################
-# Agora os redirecionamentos estão no arquivo `_redirects`
-# dentro da pasta /public e NÃO precisam estar aqui.
-# O Netlify vai ler automaticamente aquele arquivo.
-
-
 ###########################
 # HEADERS DE SEGURANÇA
 ###########################
@@ -28,4 +19,4 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-        Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://d335luupugsy2.cloudfront.net https://*.rdstation.com.br https://www.googletagmanager.com https://ajax.googleapis.com https://cdnjs.cloudflare.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://olinda.bcb.gov.br https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net https://www.google-analytics.com; frame-src 'self' https://*.firebaseapp.com https://*.rdstation.com.br; form-action 'self' https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://d335luupugsy2.cloudfront.net https://*.rdstation.com.br https://www.googletagmanager.com https://ajax.googleapis.com https://cdnjs.cloudflare.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://olinda.bcb.gov.br https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net https://www.google-analytics.com; frame-src 'self' https://*.firebaseapp.com https://*.rdstation.com.br; form-action 'self' https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net;"
