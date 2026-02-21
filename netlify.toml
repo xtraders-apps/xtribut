@@ -1,6 +1,3 @@
-###########################
-# BUILD CONFIG
-###########################
 [build]
   command = "npm run build"
   publish = "build"
@@ -8,48 +5,38 @@
 [build.environment]
   SECRETS_SCAN_ENABLED = "false"
 
-
 ###########################
 # REDIRECTS / PROXY P/ LPS
 ###########################
 
-# LP 1 – raiz do projeto de inscrição
 [[redirects]]
   from = "/inscricao-mdt"
   to   = "https://inscricao.mdt-xtraders.com.br/index.html"
   status = 200
   force  = true
 
-# LP 2
 [[redirects]]
   from = "/inscricao-mdt2"
   to   = "https://inscricao.mdt-xtraders.com.br/lp2.html"
   status = 200
   force  = true
 
-# LP 3
 [[redirects]]
   from = "/inscricao-mdt3"
   to   = "https://inscricao.mdt-xtraders.com.br/lp3.html"
   status = 200
   force  = true
 
-# LP 4
 [[redirects]]
   from = "/inscricao-mdt4"
   to   = "https://inscricao.mdt-xtraders.com.br/lp4.html"
   status = 200
   force  = true
 
-
-###########################
-# SPA PRINCIPAL
-###########################
 [[redirects]]
   from = "/*"
   to   = "/index.html"
   status = 200
-
 
 ###########################
 # HEADERS DE SEGURANÇA
