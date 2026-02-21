@@ -1,7 +1,7 @@
-/inscricao-mdt     /lp1.html   200
-/inscricao-mdt2    /lp2.html   200
-/inscricao-mdt3    /lp3.html   200
-/inscricao-mdt4    /lp4.html   200
+/inscricao-mdt     /lp1.HTML    200
+/inscricao-mdt2    /lp2.HTML    200
+/inscricao-mdt3    /lp3.HTML    200
+/inscricao-mdt4    /lp4.HTML    200
 
-/                  /index.html 200
-/*                 /index.html 200
+/                  /index.HTML  200
+/*                 /index.HTML  200
