@@ -10,46 +10,11 @@
 
 
 ###########################
-# REDIRECTS PARA AS 4 LPs
+# REDIRECTS
 ###########################
-
-# LP1 — /inscricao-mdt → lp1.html
-[[redirects]]
-  from = "/inscricao-mdt"
-  to = "/lp1.html"
-  status = 200
-  force = true
-
-# LP2 — /inscricao-mdt2 → lp2.html
-[[redirects]]
-  from = "/inscricao-mdt2"
-  to = "/lp2.html"
-  status = 200
-  force = true
-
-# LP3 — /inscricao-mdt3 → lp3.html
-[[redirects]]
-  from = "/inscricao-mdt3"
-  to = "/lp3.html"
-  status = 200
-  force = true
-
-# LP4 — /inscricao-mdt4 → lp4.html
-[[redirects]]
-  from = "/inscricao-mdt4"
-  to = "/lp4.html"
-  status = 200
-  force = true
-
-
-###########################
-# SPA PRINCIPAL (APLICAÇÃO)
-###########################
-# IMPORTANTE: sempre o ÚLTIMO redirect
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Agora os redirecionamentos estão no arquivo `_redirects`
+# dentro da pasta /public e NÃO precisam estar aqui.
+# O Netlify vai ler automaticamente aquele arquivo.
 
 
 ###########################
