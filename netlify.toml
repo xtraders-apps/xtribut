@@ -10,90 +10,44 @@
 
 
 ###########################
-# PROXY PARA LANDING PAGES
-# Mantém a URL visível no domínio principal:
-# https://mdt-xtraders.com.br/inscricao-mdt
-# https://mdt-xtraders.com.br/inscricao-mdt2
-# https://mdt-xtraders.com.br/inscricao-mdt3
-# https://mdt-xtraders.com.br/inscricao-mdt4
+# REDIRECTS / PROXY P/ LPS
 ###########################
 
-# LP 1  (mesma de antes)
+# LP 1 – raiz do projeto de inscrição
 [[redirects]]
   from = "/inscricao-mdt"
-  to = "https://inscricao.mdt-xtraders.com.br"
+  to   = "https://inscricao.mdt-xtraders.com.br/index.html"
   status = 200
-  force = true
-
-[[redirects]]
-  from = "/inscricao-mdt/*"
-  to = "https://inscricao.mdt-xtraders.com.br/:splat"
-  status = 200
-  force = true
+  force  = true
 
 # LP 2
 [[redirects]]
   from = "/inscricao-mdt2"
-  to = "https://inscricao.mdt-xtraders.com.br/LP2.HTML"
+  to   = "https://inscricao.mdt-xtraders.com.br/lp2.html"
   status = 200
-  force = true
-
-[[redirects]]
-  from = "/inscricao-mdt2/*"
-  to = "https://inscricao.mdt-xtraders.com.br/LP2.HTML/:splat"
-  status = 200
-  force = true
+  force  = true
 
 # LP 3
 [[redirects]]
   from = "/inscricao-mdt3"
-  to = "https://inscricao.mdt-xtraders.com.br/LP3.HTML"
+  to   = "https://inscricao.mdt-xtraders.com.br/lp3.html"
   status = 200
-  force = true
-
-[[redirects]]
-  from = "/inscricao-mdt3/*"
-  to = "https://inscricao.mdt-xtraders.com.br/LP3.HTML/:splat"
-  status = 200
-  force = true
+  force  = true
 
 # LP 4
 [[redirects]]
   from = "/inscricao-mdt4"
-  to = "https://inscricao.mdt-xtraders.com.br/LP4.HTML"
+  to   = "https://inscricao.mdt-xtraders.com.br/lp4.html"
   status = 200
-  force = true
-
-[[redirects]]
-  from = "/inscricao-mdt4/*"
-  to = "https://inscricao.mdt-xtraders.com.br/LP4.HTML/:splat"
-  status = 200
-  force = true
+  force  = true
 
 
 ###########################
-# PROXY PARA AS IMAGENS DA LP
-# (sem trocar a URL)
-###########################
-[[redirects]]
-  from = "/08a50033-0fa8-4f6e-9587-252d7df7ad4b.png"
-  to = "https://inscricao.mdt-xtraders.com.br/08a50033-0fa8-4f6e-9587-252d7df7ad4b.png"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/img_historico.png"
-  to = "https://inscricao.mdt-xtraders.com.br/img_historico.png"
-  status = 200
-  force = true
-
-
-###########################
-# SPA PRINCIPAL (APP)
+# SPA PRINCIPAL
 ###########################
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to   = "/index.html"
   status = 200
 
 
@@ -108,4 +62,4 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://d335luupugsy2.cloudfront.net https://*.rdstation.com.br https://www.googletagmanager.com https://ajax.googleapis.com https://cdnjs.cloudflare.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://olinda.bcb.gov.br https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net https://www.google-analytics.com; frame-src 'self' https://*.firebaseapp.com https://*.rdstation.com.br; form-action 'self' https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://d335luupugsy2.cloudfront.net https://*.rdstation.com.br https://www.googletagmanager.com https://ajax.googleapis.com https://cdnjs.cloudflare.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://olinda.bcb.gov.br https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net https://www.google-analytics.com; frame-src 'self' https://*.firebaseapp.com https://*.rdstation.com.br; form-action 'self' https://*.rdstation.com.br https://d335luupugsy2.cloudfront.net;"
