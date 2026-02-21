@@ -10,63 +10,42 @@
 
 
 ###########################
-# PROXY PARA LANDING PAGES
+# REDIRECTS PARA AS 4 LPs
 ###########################
 
-# LP 1 – raiz do projeto de inscrição
+# LP1 — /inscricao-mdt → lp1.html
 [[redirects]]
   from = "/inscricao-mdt"
-  to = "https://inscricao.mdt-xtraders.com.br"
+  to = "/lp1.html"
   status = 200
   force = true
 
-[[redirects]]
-  from = "/inscricao-mdt/*"
-  to = "https://inscricao.mdt-xtraders.com.br/:splat"
-  status = 200
-  force = true
-
-# LP 2 – /lp2 no projeto de inscrição
+# LP2 — /inscricao-mdt2 → lp2.html
 [[redirects]]
   from = "/inscricao-mdt2"
-  to = "https://inscricao.mdt-xtraders.com.br/lp2"
+  to = "/lp2.html"
   status = 200
   force = true
 
-# LP 3 – /lp3
+# LP3 — /inscricao-mdt3 → lp3.html
 [[redirects]]
   from = "/inscricao-mdt3"
-  to = "https://inscricao.mdt-xtraders.com.br/lp3"
+  to = "/lp3.html"
   status = 200
   force = true
 
-# LP 4 – /lp4
+# LP4 — /inscricao-mdt4 → lp4.html
 [[redirects]]
   from = "/inscricao-mdt4"
-  to = "https://inscricao.mdt-xtraders.com.br/lp4"
+  to = "/lp4.html"
   status = 200
   force = true
 
 
 ###########################
-# PROXY PARA AS IMAGENS DA LP (se ainda usar)
+# SPA PRINCIPAL (APLICAÇÃO)
 ###########################
-[[redirects]]
-  from = "/08a50033-0fa8-4f6e-9587-252d7df7ad4b.png"
-  to = "https://inscricao.mdt-xtraders.com.br/08a50033-0fa8-4f6e-9587-252d7df7ad4b.png"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/img_historico.png"
-  to = "https://inscricao.mdt-xtraders.com.br/img_historico.png"
-  status = 200
-  force = true
-
-
-###########################
-# SPA PRINCIPAL (APP)
-###########################
+# IMPORTANTE: sempre o ÚLTIMO redirect
 [[redirects]]
   from = "/*"
   to = "/index.html"
