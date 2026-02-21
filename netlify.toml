@@ -26,24 +26,24 @@
   status = 200
   force = true
 
-# LP 2 – lp2.html no projeto de inscrição
+# LP 2 – /lp2 no projeto de inscrição
 [[redirects]]
   from = "/inscricao-mdt2"
-  to = "https://inscricao.mdt-xtraders.com.br/lp2.html"
+  to = "https://inscricao.mdt-xtraders.com.br/lp2"
   status = 200
   force = true
 
-# LP 3 – lp3.html
+# LP 3 – /lp3
 [[redirects]]
   from = "/inscricao-mdt3"
-  to = "https://inscricao.mdt-xtraders.com.br/lp3.html"
+  to = "https://inscricao.mdt-xtraders.com.br/lp3"
   status = 200
   force = true
 
-# LP 4 – lp4.html
+# LP 4 – /lp4
 [[redirects]]
   from = "/inscricao-mdt4"
-  to = "https://inscricao.mdt-xtraders.com.br/lp4.html"
+  to = "https://inscricao.mdt-xtraders.com.br/lp4"
   status = 200
   force = true
 
