@@ -18,7 +18,7 @@
 # https://mdt-xtraders.com.br/inscricao-mdt4
 ###########################
 
-# LP 1  (como já era antes)
+# LP 1 – usa a raiz do projeto de inscrição
 [[redirects]]
   from = "/inscricao-mdt"
   to = "https://inscricao.mdt-xtraders.com.br"
@@ -31,34 +31,30 @@
   status = 200
   force = true
 
-# LP 2
+# LP 2 – aponta para lp2.html
 [[redirects]]
   from = "/inscricao-mdt2"
-  to = "https://inscricao.mdt-xtraders.com.br/LP2.HTML"
+  to = "https://inscricao.mdt-xtraders.com.br/lp2.html"
   status = 200
   force = true
 
-# se você não tiver caminhos "filhos" (ex: /inscricao-mdt2/alguma-coisa),
-# não precisa do bloco com /* pra LP2, 3 e 4. Só use se tiver assets/caminhos assim.
-
-# LP 3
+# LP 3 – aponta para lp3.html
 [[redirects]]
   from = "/inscricao-mdt3"
-  to = "https://inscricao.mdt-xtraders.com.br/LP3.HTML"
+  to = "https://inscricao.mdt-xtraders.com.br/lp3.html"
   status = 200
   force = true
 
-# LP 4
+# LP 4 – aponta para lp4.html
 [[redirects]]
   from = "/inscricao-mdt4"
-  to = "https://inscricao.mdt-xtraders.com.br/LP4.HTML"
+  to = "https://inscricao.mdt-xtraders.com.br/lp4.html"
   status = 200
   force = true
 
 
 ###########################
-# PROXY PARA AS IMAGENS DA LP
-# (sem trocar a URL)
+# PROXY PARA AS IMAGENS DA LP (se ainda usar)
 ###########################
 [[redirects]]
   from = "/08a50033-0fa8-4f6e-9587-252d7df7ad4b.png"
