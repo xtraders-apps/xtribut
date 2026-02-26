@@ -35,7 +35,7 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
       // ✅ Se estiver pago, envia link de redefinição
       await sendPasswordResetEmail(auth, email);
 
-      setMessage('Enviamos um link para o seu e-mail para você definir sua senha e acessar a plataforma.');
+      setMessage('Enviamos um link para o seu e-mail para você definir sua senha e acessar a plataforma. Verifique sua caixa de SPAM');
       setMessageType('success');
 
     } catch (error) {
