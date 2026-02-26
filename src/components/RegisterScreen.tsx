@@ -25,7 +25,7 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
 
     try {
       await sendPasswordResetEmail(auth, email);
-      setMessage('Enviamos um link para o seu e-mail para você definir sua senha e acessar a plataforma. Verifique sua caixa de SPAM');
+      setMessage('Enviamos um link para o seu e-mail para você definir sua senha e acessar a plataforma.');
       setMessageType('success');
     } catch (error: any) {
       if (error.code === 'auth/user-not-found') {
