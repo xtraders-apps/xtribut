@@ -32,28 +32,25 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
       setMessage('Enviamos um link para o seu e-mail para você definir sua senha e acessar a plataforma.');
       setMessageType('success');
     } catch (error: any) {
-      if (error.code === 'functions/permission-denied') {
+      console.error('requestFirstAccess error:', error?.code, error?.message, error);
+
+      if (error?.code === 'functions/invalid-argument') {
+        setMessage('E-mail inválido. Verifique e tente novamente.');
+      } else if (error?.code === 'functions/permission-denied') {
         setMessage('Não encontramos pagamento aprovado para este e-mail. Use o mesmo e-mail da compra.');
-        setMessageType('error');
-      } else if (error.code === 'functions/not-found') {
-        setMessage('Serviço de validação não encontrado. Atualize o backend (Cloud Functions) e tente novamente.');
-        setMessageType('error');
-      } else if (error.code === 'functions/internal') {
+      } else if (error?.code === 'functions/not-found') {
+        setMessage('Serviço de validação não encontrado. Atualize o backend e tente novamente.');
+      } else if (error?.code === 'functions/internal') {
         setMessage('Erro interno na validação de acesso. Tente novamente em instantes.');
-        setMessageType('error');
-      } else if (error.code === 'auth/user-not-found') {
-        setMessage('Não foi possível preparar sua conta. Tente novamente em alguns segundos.');
-        setMessageType('error');
-      } else if (error.code === 'auth/invalid-email') {
-        setMessage('Formato de e-mail inválido.');
-        setMessageType('error');
-      } else if (error.code === 'auth/too-many-requests') {
+      } else if (error?.code === 'auth/too-many-requests') {
         setMessage('Muitas tentativas. Aguarde alguns minutos e tente novamente.');
-        setMessageType('error');
+      } else if (error?.code === 'auth/invalid-email') {
+        setMessage('Formato de e-mail inválido.');
       } else {
         setMessage('Erro ao processar solicitação. Tente novamente.');
-        setMessageType('error');
       }
+
+      setMessageType('error');
     }
   };
 
@@ -69,10 +66,7 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
                 <stop offset="100%" stopColor="#D4AF37" />
               </linearGradient>
             </defs>
-            <path
-              fill="url(#logo-gradient-register)"
-              d="M4.76369 -0.719727C2.13278 -0.719727 0 1.41305 0 4.04396V4.04396C0.00217239 3.70526 0.105853 3.37498 0.297665 3.09573C0.489477 2.81649 0.760619 2.60109 1.07611 2.47733C1.3916 2.35357 1.73695 2.32713 2.06762 2.40142C2.39829 2.47571 2.6991 2.64732 2.93124 2.89411L12.335 12.8644C13.2797 13.866 14.5956 14.4337 15.9724 14.4337H25.321C25.7157 14.4314 26.1025 14.5448 26.4334 14.7599C26.7644 14.975 27.0249 15.2823 27.1829 15.6438C27.3409 16.0054 27.3894 16.4053 27.3224 16.794C27.2553 17.1828 27.0757 17.5434 26.8058 17.8313L2.93398 43.2184C2.70202 43.4662 2.40099 43.6387 2.06985 43.7135C1.7387 43.7884 1.3927 43.7622 1.07662 43.6383C0.760551 43.5144 0.488961 43.2986 0.297012 43.0187C0.105064 42.7389 0.00159475 42.4079 0 42.0686V42.0686C0 44.6587 2.09968 46.7584 4.68977 46.7584H55.1698C57.9313 46.7584 60.1698 44.5198 60.1698 41.7584V4.28028C60.1698 1.51886 57.9313 -0.719727 55.1698 -0.719727H4.76369Z"
-            />
+            <path fill="url(#logo-gradient-register)" d="M4.76369 -0.719727C2.13278 -0.719727 0 1.41305 0 4.04396V4.04396..." />
           </svg>
         </div>
 
