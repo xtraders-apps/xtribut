@@ -30,7 +30,6 @@ export function RegisterScreen({ onSwitchToLogin }: RegisterScreenProps) {
       await sendPasswordResetEmail(auth, normalizedEmail);
 
       setMessage('setMessage('Enviamos um link de acesso para o seu e-mail. Verifique sua caixa de entrada e também spam/lixo eletrônico.');
-.');
       setMessageType('success');
     } catch (error: any) {
       console.error('requestFirstAccess error:', error?.code, error?.message, error);
