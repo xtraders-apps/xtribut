@@ -131,7 +131,7 @@ export function IrTab() {
     }
 
     if (!selectedYear) {
-      toast.error('Por favor, selecione o ano para processar.');
+      toast.error('O arquivo importado não corresponde ao formato exigido no Módulo 3 do curso MDT. Verifique as instruções e tente novamente.');
       return;
     }
 
