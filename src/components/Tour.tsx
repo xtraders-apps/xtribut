@@ -44,7 +44,7 @@ const tourSteps: TourStep[] = [
   {
     element: '#upload-csv-area',
     title: 'Relatório de Operações',
-    intro: 'Importe seu relatório da corretora (.csv) para o cálculo do IR. Suportamos relatórios da Tradelocker, MetaTrader e outras plataformas.',
+    intro: 'importe seu relatório no fomato CSV (separado por vírgula) conforme ensinado nas aulas gravadas do módulo 3.',
     tab: 'ir',
     position: 'bottom'
   }
