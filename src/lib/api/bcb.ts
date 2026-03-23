@@ -13,7 +13,7 @@ export async function fetchBcbRateForDate(isoDate: string): Promise<void> {
     const currentIsoDate = searchDate.toISOString().split('T')[0];
     const [year, month, day] = currentIsoDate.split('-');
     const apiDate = `${month}-${day}-${year}`;
-    const url = `/api/getDollarRate?date=${apiDate}`;
+    const url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${apiDate}'&$format=json`;
 
     try {
       const response = await fetch(url);
