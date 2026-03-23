@@ -9,9 +9,25 @@ export async function handler(event) {
       };
     }
 
-    const url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${date}'&$format=json`;
+    // 🔥 ENCODE CORRETO
+    const encodedDate = `'${date}'`;
+
+    const url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao=${encodeURIComponent(encodedDate)}&$format=json`;
+
+    console.log("URL:", url);
 
     const response = await fetch(url);
+
+    if (!response.ok) {
+      const text = await response.text(); // 👈 pega erro real
+      console.error("Erro BCB:", text);
+
+      return {
+        statusCode: response.status,
+        body: JSON.stringify({ error: text }),
+      };
+    }
+
     const data = await response.json();
 
     return {
@@ -21,10 +37,13 @@ export async function handler(event) {
       },
       body: JSON.stringify(data),
     };
+
   } catch (error) {
+    console.error("Erro geral:", error);
+
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Erro ao buscar cotação" }),
+      body: JSON.stringify({ error: "Erro interno" }),
     };
   }
 }
