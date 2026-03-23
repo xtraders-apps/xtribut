@@ -5,9 +5,10 @@
 [build.environment]
   SECRETS_SCAN_ENABLED = "false"
 
-###########################
-# REDIRECTS / PROXY P/ LPS
-###########################
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
 
 [[redirects]]
   from = "/inscricao-mdt"
@@ -36,11 +37,6 @@
 [[redirects]]
   from = "/*"
   to   = "/index.html"
-  status = 200
-  
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
   status = 200
   
 
